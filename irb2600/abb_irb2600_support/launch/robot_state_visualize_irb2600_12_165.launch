@@ -20,7 +20,7 @@
     <arg name="robot" value="$(arg robot_name)" />
   </include>
 
-  <node name="robot_state_publisher" pkg="robot_state_publisher"
+  <node name="$(arg robot_name)_robot_state_publisher" pkg="robot_state_publisher"
     type="robot_state_publisher" >
     <remap from="/joint_states" to="/$(arg robot_name)/joint_states"/>
   </node>
