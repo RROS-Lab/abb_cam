@@ -16,12 +16,12 @@
   <include file="$(find abb_driver)/launch/robot_interface.launch">
     <arg name="robot_ip"    value="$(arg robot_ip)" />
     <arg name="J23_coupled" value="$(arg J23_coupled)" />
-    <arg name="robot" value="/irb2600" />
+    <arg name="robot" value="irb2600" />
   </include>
 
-  <node name="robot_state_publisher" pkg="robot_state_publisher"
+  <node name="(arg robot)_robot_state_publisher" pkg="robot_state_publisher"
     type="robot_state_publisher" >
-    <remap from="/joint_states" to="$(arg robot)/joint_states"/>
+    <remap from="/joint_states" to="$/(arg robot)/joint_states"/>
   </node>
 
   <include file="$(find abb_irb2600_support)/launch/load_irb2600_12_165.launch" />

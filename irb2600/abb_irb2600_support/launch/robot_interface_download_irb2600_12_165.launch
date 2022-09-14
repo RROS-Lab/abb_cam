@@ -16,6 +16,6 @@
   <include file="$(find abb_driver)/launch/robot_interface.launch">
     <arg name="robot_ip"    value="$(arg robot_ip)" />
     <arg name="J23_coupled" value="$(arg J23_coupled)" />
-    <arg name="robot" value="/irb2600" />
+    <arg name="robot" value="irb2600" />
   </include>
 </launch>

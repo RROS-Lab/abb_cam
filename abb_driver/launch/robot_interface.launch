@@ -21,7 +21,7 @@
   <arg name="J23_coupled" default="false" doc="If true, compensate for J2-J3 parallel linkage" />
 
   <!-- robot: Name of the robot, e.g. /irb2600 -->
-  <arg name="robot" doc="Name of the robot" default="/irb2600"/>
+  <arg name="robot" doc="Name of the robot" default="irb2600"/>
 
   
   <!-- copy the specified arguments to the Parameter Server, for use by nodes below -->
@@ -30,26 +30,26 @@
   
   <!-- robot_state: publishes joint positions and robot-state data
                    (from socket connection to robot) -->
-  <node pkg="abb_driver" type="robot_state" name="irb2600_robot_state">
-    <remap from="/joint_states" to="$(arg robot)/joint_states"/>
-    <remap from="/feedback_states" to="$(arg robot)/feedback_states"/>
-    <remap from="/robot_status" to="$(arg robot)/robot_status"/>
+  <node pkg="abb_driver" type="robot_state" name="$(arg robot)_robot_state">
+    <remap from="/joint_states" to="/$(arg robot)/joint_states"/>
+    <remap from="/feedback_states" to="/$(arg robot)/feedback_states"/>
+    <remap from="/robot_status" to="/$(arg robot)/robot_status"/>
   </node>
   
   <!-- motion_download_interface: sends robot motion commands by DOWNLOADING path to robot
                                   (using socket connection to robot) -->
-  <node pkg="abb_driver" type="motion_download_interface" name="irb2600_motion_download_interface">
-    <remap from="/joint_path_command" to="$(arg robot)/joint_path_command"/>
-    <remap from="/joint_states" to="$(arg robot)/joint_states"/>
-    <remap from="/stop_motion" to="$(arg robot)/stop_motion"/>
+  <node pkg="abb_driver" type="motion_download_interface" name="$(arg robot)_motion_download_interface">
+    <remap from="/joint_path_command" to="/$(arg robot)/joint_path_command"/>
+    <remap from="/joint_states" to="/$(arg robot)/joint_states"/>
+    <remap from="/stop_motion" to="/$(arg robot)/stop_motion"/>
   </node>
 
   <!-- joint_trajectory_action: provides actionlib interface for high-level robot control -->
-  <node pkg="industrial_robot_client" type="joint_trajectory_action" name="irb2600_joint_trajectory_action">
-    <remap from="/robot_status" to="$(arg robot)/robot_status"/>
-    <remap from="/feedback_states" to="$(arg robot)/feedback_states"/>
-    <remap from="/joint_path_command" to="$(arg robot)/joint_path_command"/>
-    <remap from="/joint_trajectory_action" to="$(arg robot)/joint_trajectory_action"/>
+  <node pkg="industrial_robot_client" type="joint_trajectory_action" name="$(arg robot)_joint_trajectory_action">
+    <remap from="/robot_status" to="/$(arg robot)/robot_status"/>
+    <remap from="/feedback_states" to="/$(arg robot)/feedback_states"/>
+    <remap from="/joint_path_command" to="/$(arg robot)/joint_path_command"/>
+    <remap from="/joint_trajectory_action" to="/$(arg robot)/joint_trajectory_action"/>
   </node>
 
 </launch>
