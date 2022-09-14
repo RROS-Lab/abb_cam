@@ -10,18 +10,19 @@
 <launch>
   <arg name="robot_ip" doc="IP of the controller" default="192.168.10.26"/>
   <arg name="J23_coupled" default="false" doc="If true, compensate for J2-J3 parallel linkage" />
+  <arg name="robot_name" doc="Robot name" default="irb2600"/>
 
   <rosparam command="load" file="$(find abb_irb2600_support)/config/joint_names_irb2600_12_165.yaml" />
 
   <include file="$(find abb_driver)/launch/robot_interface.launch">
     <arg name="robot_ip"    value="$(arg robot_ip)" />
     <arg name="J23_coupled" value="$(arg J23_coupled)" />
-    <arg name="robot" value="irb2600" />
+    <arg name="robot" value="$(arg robot_name)" />
   </include>
 
-  <node name="(arg robot)_robot_state_publisher" pkg="robot_state_publisher"
+  <node name="robot_state_publisher" pkg="robot_state_publisher"
     type="robot_state_publisher" >
-    <remap from="/joint_states" to="$/(arg robot)/joint_states"/>
+    <remap from="/joint_states" to="/$(arg robot_name)/joint_states"/>
   </node>
 
   <include file="$(find abb_irb2600_support)/launch/load_irb2600_12_165.launch" />

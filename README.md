@@ -3,16 +3,18 @@ This repository includes adapted ROS interface for 2 ABB manipulators (IRB2600/I
 
 ## Content
 1. [ABB IRB2600](#abb-irb2600)
-<!-- 1. [ABB IRB120](#abb-irb120) -->
+1. [ABB IRB120](#abb-irb120)
 
 ## Dependencies
-
+- [ROS Industrial Core](https://github.com/ros-industrial/industrial_core)
 
 ## ABB IRB2600
 [ROS packages](./irb2600/)
 ### Launch ROS Interface
 To enable ROS interface, run:  
-    `roslaunch abb_irb2600_support robot_interface_download_irb2600_12_165.launch robot_ip:=[robot IP]`  
+```
+roslaunch abb_irb2600_support robot_interface_download_irb2600_12_165.launch robot_ip:=[robot IP]
+```
 
 or include the above launch file:
 ```xml
@@ -33,5 +35,5 @@ or include the above launch file:
 
 
 
-<!-- ## ABB IRB120 -->
-<!-- [ROS packages](./irb120/) -->
+## ABB IRB120
+[ROS packages](./irb120/)
