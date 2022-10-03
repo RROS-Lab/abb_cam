@@ -27,16 +27,30 @@ int main(int argc, char* argv[]) {
   std::fill(point.positions.begin(), point.positions.end(), 0.0);
   point.positions.insert(
     point.positions.begin(),
-    {1.18, 0.13, 0.38, 4.91, -1.73, -5.89}
+    {1.0, 0.13, 0.38, 4.91, -1.73, -5.89}
   );
   
 
-  // point
+  // point 0
   joint_traj_msg.points.push_back(point);
 
-  if (ros::ok()) joint_traj_pub.publish(joint_traj_msg);
+  // point 1
+  *point.positions.begin() = 0.9;
+  point.time_from_start.sec = 1;
+  joint_traj_msg.points.push_back(point);
 
-  ros::spin();
+  // point 2
+  *point.positions.begin() = 1.1;
+  point.time_from_start.sec = 3;
+  joint_traj_msg.points.push_back(point);
+
+  std::cout << "press Enter to continue:"<<std::flush;
+  getchar();
+
+  
+  joint_traj_pub.publish(joint_traj_msg);
+
+  // ros::spin();
   ros::shutdown();
   return 0;
 }
