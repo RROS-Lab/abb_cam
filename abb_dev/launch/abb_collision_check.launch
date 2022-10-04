@@ -1,0 +1,13 @@
+<launch>
+  <include file="$(find abb_irb2600_12_165_moveit_config)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+  <node name="abb_collision_check_node"
+        pkg="abb_dev"
+        type="abb_collision_check_node"
+        respawn="false" output="screen">
+    <rosparam command="load"
+              file="$(find abb_irb2600_12_165_moveit_config)/config/kinematics.yaml"/>
+  </node>
+</launch>

@@ -13,6 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   trajectory_msgs
+  moveit_ros_planning_interface
+  moveit_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -139,6 +141,10 @@ add_executable(joint_trajectory_test_node
   src/demo/joint_trajectory_test.cpp
 )
 
+add_executable(abb_collision_check_node 
+  src/demo/abb_collision_check.cpp
+)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -160,6 +166,10 @@ add_executable(joint_trajectory_test_node
 # )
 
 target_link_libraries(joint_trajectory_test_node  
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(abb_collision_check_node  
   ${catkin_LIBRARIES}
 )
 

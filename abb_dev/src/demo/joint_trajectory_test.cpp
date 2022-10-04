@@ -14,7 +14,7 @@ trajectory_msgs::JointTrajectory joint_traj_builder() {
 }  // namespace cam
 
 int main(int argc, char* argv[]) {
-  ros::init(argc, argv, "joint_trajectory_test");
+  ros::init(argc, argv, "joint_trajectory_test_node");
 
   ros::NodeHandle nh;
 
