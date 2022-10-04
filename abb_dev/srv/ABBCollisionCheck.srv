@@ -1,0 +1,5 @@
+float64[] joint_state
+
+---
+
+bool collided
