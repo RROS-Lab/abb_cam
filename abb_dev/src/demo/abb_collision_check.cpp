@@ -1,11 +1,23 @@
+/**
+ * @file Collision check service for a manipulator
+ * @author Peijie Xu (peijiexu@usc.edu)
+ * @brief (1) edit launch file to load manipulator's planning_context.launch
+ *            file into robot_description (a ROS server)
+ *        (2) choose move group, in this file the default group is
+ *            "manipulator", need to be adapted according to diversive
+ *            situations
+ * @version 0.1
+ * @date 2022-10-09
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+#include <abb_dev/ABBCollisionCheck.h>
 #include <moveit/planning_scene/planning_scene.h>
 #include <moveit/robot_model/robot_model.h>
 #include <moveit/robot_model_loader/robot_model_loader.h>
 #include <moveit/robot_state/robot_state.h>
 #include <ros/ros.h>
-#include <abb_dev/ABBCollisionCheck.h>
-// #include "/* header */"
-//
 
 template <typename T>
 void print_vector(const std::vector<T>& vec) {
@@ -58,12 +70,11 @@ class CollisionChecker {
 
 CollisionChecker* cc;
 
-
 bool cc_callback(abb_dev::ABBCollisionCheck::Request& req,
                  abb_dev::ABBCollisionCheck::Response& res) {
-  std::vector<double> target_joint_values = {0.0, 0.0, 0.0, 2.9, 0.0, 1.4};
-  res.collided = cc->check_collision(target_joint_values);
-  // res.collided = cc->check_collision(req.joint_state);
+  // std::vector<double> target_joint_values = {0.0, 0.0, 0.0, 2.9, 0.0, 1.4};
+  // res.collided = cc->check_collision(target_joint_values);
+  res.collided = cc->check_collision(req.joint_state);
   return true;
 }
 
@@ -73,12 +84,11 @@ int main(int argc, char* argv[]) {
   // ros::AsyncSpinner spinner(1);
   // spinner.start();
 
-  // std::vector<double> target_joint_values = {0.0, 0.0, 0.0, 2.9, 0.0, 1.4};
-
   cc = new CollisionChecker();
 
   // ROS_INFO_STREAM("Test: Current state is "
-  //                 << (cc.check_collision(target_joint_values) ? "in" : "not in")
+  //                 << (cc.check_collision(target_joint_values) ? "in" : "not
+  //                 in")
   //                 << " self collision");
 
   // const std::vector<std::string>& joint_names =

@@ -112,13 +112,13 @@
       </collision>
     </link>
 
-    <!-- Joints -->
+    <!-- Joints - Rishi modified axis 1 (maybe axis 3 also) of abb so it doesn't swing around-->
     <joint name="${prefix}joint_1" type="revolute">
       <origin xyz="0 0 0.445" rpy="0 0 0" />
       <parent link="${prefix}base_link" />
       <child link="${prefix}link_1" />
       <axis xyz="0 0 1" />
-      <limit lower="-3.14159" upper="3.14159" effort="0" velocity="3.054" />
+      <limit lower="-0.7" upper="3.0" effort="0" velocity="3.054" />
     </joint>
     <joint name="${prefix}joint_2" type="revolute">
       <origin xyz="0.15 0 0.0" rpy="0 0 0" />
@@ -139,7 +139,7 @@
       <parent link="${prefix}link_3" />
       <child link="${prefix}link_4" />
       <axis xyz="1 0 0" />
-      <limit lower="-6.981" upper="6.981" effort="0" velocity="6.283" />
+      <limit lower="1.4" upper="5.0" effort="0" velocity="6.283" />
     </joint>
     <joint name="${prefix}joint_5" type="revolute">
       <origin xyz="0.795 0 0 " rpy="0 0 0" />
@@ -178,6 +178,54 @@
       <origin xyz="0 0 0" rpy="0 ${radians(90)} 0" />
       <parent link="${prefix}flange" />
       <child link="${prefix}tool0" />
+    </joint>
+
+    <link name="camera_mount">
+      <visual>
+      <geometry>
+          <mesh filename="package://system/database/meshes/camera_mount.stl"
+              scale="1 1 1"/>
+      </geometry>
+      <material name="ABS" >
+          <color rgba="0.5 0.5 0.5 1.0" />
+          </material> 	
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://system/database/meshes/camera_mount.stl" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint type="fixed" name="mount_joint">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="${prefix}tool0"/>
+        <child link="camera_mount"/>
+    </joint>
+
+    <link name="mould">
+      <visual>
+        <origin xyz="0.626565 0.631265 0.140994" rpy="0.0033 -0.1027 2.88" />
+        <geometry>
+          <mesh filename="package://system/database/meshes/mould.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="ABS" >
+          <color rgba="0.5 0.5 0.5 1.0" />
+        </material> 
+      </visual>
+      <collision>
+        <origin xyz="0.626565 0.631265 0.140994" rpy="0.0033 -0.1027 2.88" />
+        <geometry>
+          <mesh filename="package://system/database/meshes/mould.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link> 
+
+    <joint type="fixed" name="mould_joint">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <parent link="${prefix}base_link"/>
+        <child link="mould"/>
     </joint>
   </xacro:macro>
 </robot>
