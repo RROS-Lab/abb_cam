@@ -6,11 +6,18 @@ This repository includes adapted ROS interface for 2 ABB manipulators (IRB2600/I
 1. [ABB IRB120](#abb-irb120)
 
 ## Dependencies
+
+### Quick Configre with ROS install
+In this directory([Workspace]/src/abb_cam), run following command in a terminal:  
+```
+rosinstall .
+```  
+### List
 - [ROS Industrial Core](https://github.com/ros-industrial/industrial_core)
 
 ## ABB IRB2600
 [ROS packages](./irb2600/)
-### Launch ROS Interface
+### Launch ROS Interfac
 To enable ROS interface, run:  
 ```
 roslaunch abb_irb2600_support robot_interface_download_irb2600_12_165.launch robot_ip:=[robot IP]
@@ -32,7 +39,11 @@ or include the above launch file:
 - Send spline in joint space: (ROS action)  
   `/irb2600/joint_trajectory_action` 
 
-
+### IRB2600 With Moveit!
+In terminal, run: 
+```
+roslaunch abb_irb2600_12_165_moveit_config moveit_planning_execution.launch sim:=false
+```
 
 
 ## ABB IRB120
